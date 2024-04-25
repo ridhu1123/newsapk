@@ -26,6 +26,7 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(title: Text("RSS FEED",style:GoogleFonts.robotoSlab(fontWeight: FontWeight.w600) ,),backgroundColor: Colors.greenAccent,),
 
       body:_feed==null?
@@ -35,8 +36,11 @@ class _HomescreenState extends State<Homescreen> {
       
       :GridView.builder(
        itemCount:_feed!.items!.length ,
-       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,  crossAxisSpacing: 16,
-                       mainAxisSpacing: 16,), itemBuilder: (context, index) {
+       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1,
+          crossAxisSpacing: 16,
+                       mainAxisSpacing: 12,
+                       mainAxisExtent: 210,), itemBuilder: (context, index) {
                          final data=_feed!.items![index];
                            final image=data.media;
                            print("imagesss $image");
@@ -46,16 +50,22 @@ class _HomescreenState extends State<Homescreen> {
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewScreen(link: data.link!,)));
                           },
                            child:  Container(
-                           height: 200,
+                           height: 300,
+                           
                            decoration: BoxDecoration(
                              borderRadius: const BorderRadius.all(
-                               Radius.circular(16),
+                               Radius.circular(5),
                              ),
                              image: DecorationImage(
+                            
                                image: NetworkImage(
+                                
                                  data.media!.contents![0].url!,
+                                 
                                ),
+                               
                                fit: BoxFit.cover,
+                               
                              ),
                            ),
                            child: Padding(
@@ -65,8 +75,8 @@ class _HomescreenState extends State<Homescreen> {
                                child: Text(
                                  data.title!,
                                  maxLines: 3,
-                                 style: GoogleFonts.montserrat(
-                                   fontSize: 15,
+                                 style: GoogleFonts.robotoSlab(
+                                   fontSize: 25,
                                    fontWeight: FontWeight.bold,
                                    color: Colors.white,
                                    backgroundColor: Colors.black26,
